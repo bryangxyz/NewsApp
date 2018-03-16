@@ -1,0 +1,10 @@
+.category .btn {
+  margin-left: 10px;
+}
+
+.card {
+  height: calc(100% - 20px);
+  margin-bottom: 20px;
+}
+
+
