@@ -1,6 +1,6 @@
 # News Search App
 
-> a news search app to get top news and search for interested topics
+> a news search app to get top news and search for interested topics, the user can also save news once log in.
 
 ## Quick Start
 

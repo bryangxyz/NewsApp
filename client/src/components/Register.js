@@ -7,7 +7,9 @@ class Register extends Component {
     this.state = {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      password2: '',
+      errors: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,20 +29,36 @@ class Register extends Component {
     const user = {
       name: this.state.name,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      password2: this.state.password2
     };
     axios.post(
       '/users/register',
       user
     ).then(res => {
-      this.props.history.push('/users/login');
+      if (!res.data.errors) {
+        this.props.history.push('/users/login');
+      } else {
+        this.setState({
+          errors: res.data.errors
+        }, () => console.log(this.state.errors));
+      }
     }).catch(err => console.log(err));
     e.preventDefault();
   }
   
   render() {
+    const errors = this.state.errors.length > 0 && (
+      this.state.errors.map((error, i) => (
+        <div key={i} className="alert alert-danger" role="alert">
+          {error.msg}
+        </div>
+      ))
+    );
+
     return (
       <div className="container">
+        {errors}
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Name:</label>
@@ -48,11 +66,11 @@ class Register extends Component {
           </div>
           <div className="form-group">
             <label>Email:</label>
-            <input className="form-control" type="text" name="email" value={this.state.email} onChange={this.handleChange} />
+            <input className="form-control" type="email" name="email" value={this.state.email} onChange={this.handleChange} />
           </div>
           <div className="form-group">
             <label>Password:</label>
-            <input className="form-control" type="text" name="password" value={this.state.password} onChange={this.handleChange} />
+            <input className="form-control" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
           </div>
           <div className="form-group">
             <label>Password Confirm:</label>
