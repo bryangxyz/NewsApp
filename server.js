@@ -1,17 +1,65 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
+const config = require('./config/database');
 
+mongoose.connect(config.database);
+let db = mongoose.connection;
+
+// Check connection
+db.once('open', () => console.log('Connected to MongoDb'));
+
+// Check for DB errors
+db.on('error', (err) => console.log(err));
+
+// Init App
 const app = express();
+
+// Bring in Models
+const Article = require('./models/article');
+
+// Body-parser Middleware
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+
+// Express Session Middleware
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Express Messages Middleware
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
+// Passport Config
+require('./config/passport')(passport);
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('*', (req, res, next) => {
+  res.locals.user = req.user || null;
+  next();
+});
 
 const port = 5000;
 
-app.get('/api/players', (req, res) => {
-  const players = [
-    {id: 1, firstName: 'Kobe', lastName: 'Bryant'},
-    {id: 2, firstName: 'Steve', lastName: 'Kerr'},
-    {id: 3, firstName: 'James', lastName: 'Harden'}
-  ];
-  res.json(players);
-});
+// Route Files
+const articles = require('./routes/articles');
+const users = require('./routes/users');
+
+app.use('/articles', articles);
+app.use('/users', users);
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`);

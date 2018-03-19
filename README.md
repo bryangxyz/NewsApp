@@ -23,7 +23,10 @@ npm run client
 # Server runs on http://localhost:5000 and client on http://localhost:3000
 ```
 ## App Info
-![Splash](./screenshots/main.png)
+![Splash](./screenshots/screen1.png)
+![Splash](./screenshots/login.png)
+![Splash](./screenshots/screen2.png)
+
 
 ## Built With
 
