@@ -56,7 +56,7 @@ app.get('*', (req, res, next) => {
   next();
 });
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // Route Files
 const articles = require('./routes/articles');
