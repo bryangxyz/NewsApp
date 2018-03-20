@@ -9,6 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       user: {},
+      error: ''
     };
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -19,11 +20,15 @@ class App extends Component {
       '/users/login',
       user
     ).then(res => {
-      if (res.data) {
+      if (res.data.user.name !== undefined) {
         this.setState({
-          user: res.data
+          user: res.data.user,
         });
-      } 
+      } else {
+        this.setState({
+          error: res.data.error,
+        }, () => console.log(this.state.error));
+      }
     }).catch(err => console.log(err));
   }
 
@@ -41,7 +46,7 @@ class App extends Component {
     return (
       <div>
         <Navbar user={this.state.user} handleLogout={this.handleLogout} />
-        <Main user={this.state.user} handleAuthentication={this.handleAuthentication} />
+        <Main user={this.state.user} handleAuthentication={this.handleAuthentication} error={this.state.error} />
       </div>
     );
   }

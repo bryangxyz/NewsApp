@@ -5,10 +5,20 @@ class Login extends Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.error !== this.props.error) {
+      this.setState({
+        error: this.props.error
+      })
+    } 
+    
   }
 
   handleChange(e) {
@@ -31,8 +41,15 @@ class Login extends Component {
   }
 
   render() {
+    const error = this.state.error && 
+      <div className="alert alert-danger" role="alert">
+        {this.state.error}
+      </div>;
+
     return (
       <div className="container">
+        <br />
+        {error}
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Email:</label>

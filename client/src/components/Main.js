@@ -13,7 +13,7 @@ const Main = (props) => (
       <Route exact path="/users/register" component={Register} />
       <Route exact path="/users/login" render={() => (
         props.user.name === undefined ?
-          <Login user={props.user} handleAuthentication={props.handleAuthentication} /> :
+          <Login user={props.user} handleAuthentication={props.handleAuthentication} error={props.error} /> :
           <Redirect to="/" />
       )} />
     </Switch>

@@ -32,7 +32,6 @@ router.post('/register', [
               console.log(err);
               return;
             } else {
-              req.flash('success', 'You are now registered and can log in');
               res.send();
             }
           });
@@ -50,13 +49,20 @@ router.post('/register', [
 // Login Post Route
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
+    
     if (err) throw err;
     if (!user) {
-      return res.send();
+      return res.send({
+        user: {},
+        error: info.message
+      });
     }
     req.login(user, err => {
       if (err) throw err;
-      return res.send(user);
+      return res.send({
+        user,
+        error: ''
+      });
     });
   })(req, res, next);
 });
