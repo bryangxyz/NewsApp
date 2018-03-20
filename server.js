@@ -6,7 +6,11 @@ const session = require('express-session');
 const passport = require('passport');
 const config = require('./config/database');
 
-mongoose.connect(config.database);
+// Local Mongodb connection
+// mongoose.connect(config.database);
+// Mlab connection
+const mongoURI = 'mongodb://bryan:bryan@ds249545.mlab.com:49545/news';
+mongoose.connect(mongoURI);
 let db = mongoose.connection;
 
 // Check connection
