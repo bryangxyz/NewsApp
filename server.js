@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const config = require('./config/database');
+const path = require('path');
 
 // Local Mongodb connection
 // mongoose.connect(config.database);
@@ -30,6 +31,9 @@ const Article = require('./models/article');
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+
+// Set Public Folder
+app.use(express.static(path.join(__dirname, 'client/public')));
 
 // Express Session Middleware
 app.use(session({
