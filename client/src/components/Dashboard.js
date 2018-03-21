@@ -3,8 +3,8 @@ import Search from './Search';
 import Article from './Article';
 import keys from '../config/keys';
 
-const mykey = process.env.NEWSAPI_KEY || keys.NEWSAPI_KEY;
-console.log(mykey);
+const mykey = keys.NEWSAPI_KEY;
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -72,7 +72,6 @@ class Dashboard extends Component {
         <Search searchArticles={this.searchArticles} />
         <div>
           <h2>Top News</h2>
-          <h2>{process.env}</h2>
           <div className="category">
             Category:
             <button type="button" className="btn btn-primary btn-sm" id="business" onClick={this.getCategory}>business</button>
