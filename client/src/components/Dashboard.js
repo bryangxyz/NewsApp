@@ -3,8 +3,8 @@ import Search from './Search';
 import Article from './Article';
 import keys from '../config/keys';
 
-const mykey = process.env.MY_KEY || keys.MY_KEY;
-
+const mykey = process.env.NEWSAPI_KEY || keys.NEWSAPI_KEY;
+console.log(mykey);
 class Dashboard extends Component {
   constructor(props) {
     super(props);

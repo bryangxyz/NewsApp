@@ -1,3 +1,3 @@
 module.exports = {
-  MY_KEY: process.env.MY_KEY,
+  NEWSAPI_KEY: process.env.NEWSAPI_KEY,
 }
