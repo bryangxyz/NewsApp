@@ -69,8 +69,6 @@ const users = require('./routes/users');
 app.use('/articles', articles);
 app.use('/users', users);
 
-console.log(process.env);
-
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`);
 })
