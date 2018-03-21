@@ -32,8 +32,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-// Set Public Folder
-app.use(express.static(path.join(__dirname, 'client/public')));
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Express Session Middleware
 app.use(session({
