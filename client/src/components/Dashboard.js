@@ -3,7 +3,7 @@ import Search from './Search';
 import Article from './Article';
 import keys from '../config/keys';
 
-const mykey = keys.MY_KEY;
+const mykey = process.env.MY_KEY || keys.MY_KEY;
 
 class Dashboard extends Component {
   constructor(props) {
