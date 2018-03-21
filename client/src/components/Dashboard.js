@@ -72,6 +72,8 @@ class Dashboard extends Component {
         <Search searchArticles={this.searchArticles} />
         <div>
           <h2>Top News</h2>
+          <h2>{process.env.NEWSAPI_KEY}</h2>
+          <h2>{keys.NEWSAPI_KEY}</h2>
           <div className="category">
             Category:
             <button type="button" className="btn btn-primary btn-sm" id="business" onClick={this.getCategory}>business</button>
