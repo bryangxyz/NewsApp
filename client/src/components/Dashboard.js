@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Search from './Search';
 import Article from './Article';
-import keys from '../config/config';
+// import keys from '../config/config';
 
-const mykey = process.env.MY_KEY || keys.MY_KEY;
+const mykey = process.env.MY_KEY;
 
 class Dashboard extends Component {
   constructor(props) {
