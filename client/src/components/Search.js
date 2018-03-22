@@ -17,7 +17,10 @@ class Search extends Component {
   }
 
   handleSubmit(e) {
-    this.props.searchArticles(this.state.keyword);
+    const keyword = this.state.keyword.replace(/\s/g, '');
+    const newKeyword = `"${keyword}"`;
+    console.log('keyword',newKeyword);
+    this.props.searchArticles(newKeyword);
     e.preventDefault();
   }
 
